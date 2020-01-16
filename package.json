@@ -1,0 +1,17 @@
+{
+  "name": "web-combine-project",
+  "version": "1.0.0",
+  "description": "This is a web-app that combine some useful tools.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js -e js,hbs`"
+  },
+  "author": "Zhengyang Zhao",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.8.7",
+    "nodemon": "^2.0.2"
+  }
+}
