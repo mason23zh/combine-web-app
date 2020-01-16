@@ -2,11 +2,30 @@ const express = require('express');
 const mongoose = require('mongoose');
 const passport = require('passport');
 
+//*keys
+const keys = require('../config/keys');
+
+//*user model load
+require('../models/User')
+
 //*Passport config
 require('../config/passport')(passport);
 
 //* load ROUTES
 const auth = require('../routes/auth');
+
+//* Global promises
+mongoose.Promise = global.Promise;
+
+//*Database connection
+const dbURL = 'mongodb://zhengyang:Zzy1229!@ds263808.mlab.com:63808/multifunctionweb-dev?connect=replicaSet'
+
+mongoose.connect(keys.mongoURI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    })
+    .then(() => console.log('MongoDB connected.'))
+    .catch(err => console.log('Smthing is wrong with MDB:' + err));
 
 const app = express();
 
