@@ -1,5 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const passport = require('passport');
+
+//*Passport config
+require('../config/passport')(passport);
+
+//* load ROUTES
+const auth = require('../routes/auth');
 
 const app = express();
 
@@ -11,6 +18,8 @@ const port = process.env.PORT || 5000;
 app.get('/', (req, res) => {
     res.send('first page');
 });
+
+app.use('/auth', auth)
 
 
 
