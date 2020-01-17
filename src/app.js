@@ -4,8 +4,7 @@ const passport = require('passport');
 const cookieParse = require('cookie-parser');
 const session = require('express-session');
 const expresHBS = require('express-handlebars');
-
-
+const path = require('path');
 
 //*keys
 const keys = require('../config/keys');
@@ -37,7 +36,7 @@ mongoose
 
 const app = express();
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname, '../public')));
 
 //*handlebar setup
 app.engine(

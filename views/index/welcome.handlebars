@@ -1,10 +1,11 @@
-<link rel="../../public/css/bootstrap-social.css">
 <div class="jumbotron text-center">
+    {{#if user}}
+    <h1 class="display-3">Welcome, {{firstName}}</h1>
+    {{else}}
     <h1 class="display-3">Welcome</h1>
     <p class="lead">A web app with some useful tools</p>
-    <a href="/auth/google" class="btn btn-dark btn-lg"><i class="fa ga-google"></i> Sign in with google</a>
-
-    <a class="btn btn-block btn-social btn-twitter">
-        <span class="fa fa-twitter"></span> Sign in with Twitter
+    <a class="btn btn-primary btn-social btn-google" href="/auth/google">
+        <span class="fa fa-google"></span> SIGN IN WITH GOOGLE
     </a>
+    {{/if}}
 </div>
