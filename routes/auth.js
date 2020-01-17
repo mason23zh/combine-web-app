@@ -15,5 +15,24 @@ router.get('/google/callback',
         res.redirect('/dashboard');
     });
 
+router.get('/verify', (req, res) => {
+    if (req.user) {
+        console.log(req.user);
+    } else {
+        console.log('not auth');
+    }
+})
+
+router.get('/logout', (req, res) => {
+    req.logOut();
+    res.redirect('/');
+});
+
+router.get('/testAuth', (req, res) => {
+    if (req.user) {
+        res.send(req.user);
+    }
+})
+
 
 module.exports = router;
