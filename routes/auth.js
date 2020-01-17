@@ -25,6 +25,7 @@ router.get('/verify', (req, res) => {
 
 router.get('/logout', (req, res) => {
     req.logOut();
+    console.log('log out');
     res.redirect('/');
 });
 
