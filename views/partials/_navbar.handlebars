@@ -11,24 +11,6 @@
             </li>
 
             {{#if user}}
-            <li class="nav-item">
-                <a class="nav-link" href="/dashboard">Dashboard</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/todolist">To-do List</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/auth/logout">Log Out</a>
-            </li>
-            {{else}}
-            <li class="nav-item">
-                <a class="nav-link" href="/testPlaceHolder">Placeholder</a>
-            </li>
-            {{/if}}
-        </ul>
-
-        <ul class="navbar-nav ml-auto">
-            {{#if user}}
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink">To-do
                     list</a>
@@ -37,12 +19,18 @@
                     <a href="/todolist/add" class="dropdown-item">Add list</a>
                 </div>
             </li>
+
+            {{/if}}
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+            {{#if user}}
             <li class="nav-item">
                 <a href="/auth/logout" class="nav-link">Logout</a>
             </li>
             {{else}}
             <li class="nav-item">
-                <a href="/" class="nav-link">Login</a>
+                <a href="/auth/google" class="nav-link">Login</a>
             </li>
             {{/if}}
         </ul>
