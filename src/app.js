@@ -8,6 +8,11 @@ const path = require('path');
 const bodyParse = require('body-parser');
 const flash = require('connect-flash');
 const methodOverride = require('method-override');
+const revGeocode = require('./utils/reverseGeocode');
+const forecast = require('./utils/forecast');
+
+
+
 
 //*keys
 const keys = require('../config/keys');
@@ -39,6 +44,10 @@ mongoose
   .catch(err => console.log('Smthing is wrong with MDB:' + err));
 
 const app = express();
+
+app.use(express.json({
+  limit: '1mb'
+}));
 
 app.use(flash());
 
@@ -83,7 +92,7 @@ app.use(passport.session());
 
 app.use(flash());
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
   res.locals.error = req.flash('error');

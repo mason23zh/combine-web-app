@@ -1,7 +1,6 @@
 <div class="jumbotron text-center">
-    {{#if user}}
-    <h1 class="display-3">Welcome, {{firstName}}</h1>
-    <h3 id="latitude" class="display-5">Current Weather:</h3>
+    {{#if userRequest}}
+    <h1 class="display-3">Welcome, {{userRequest.firstName}}</h1>
     {{else}}
     <h1 class="display-3">Welcome</h1>
     <p class="lead">A web app with some useful tools</p>
@@ -11,9 +10,18 @@
     </a>
     {{/if}}
 </div>
-<p>Some weather data will shown here</p>
-<form id="display-weather-form" action="/" method="POST">
-    <input type="hidden" id="latitude" value="">
-    <input type="hidden" id="longitude" value="">
-    <button type="submit"> submit</button>
+
+<form action="/" method="POST">
+    <p hidden id="latitude" name="lat" value=""></p>
+    <p hidden id="longitude" name="lon" value=""></p>
 </form>
+
+<div class="jumbotron text-center">
+    {{#if weatherData}}
+    <h3 class="display-5">Weather</h3>
+    <p class="lead">Time Zone: {{weatherData.timezone}}</p>
+    <p class="lead">Current: {{weatherData.temperature}} °C</p>
+    <p class="lead">Feels like: {{weatherData.apparentTemperature}} °C</p>
+    <p class="lead">Condition: {{weatherData.summary}}</p>
+    {{/if}}
+</div>
