@@ -1,11 +1,19 @@
 <div class="jumbotron text-center">
     {{#if user}}
     <h1 class="display-3">Welcome, {{firstName}}</h1>
+    <h3 id="latitude" class="display-5">Current Weather:</h3>
     {{else}}
     <h1 class="display-3">Welcome</h1>
     <p class="lead">A web app with some useful tools</p>
+    <p class="lead">Sign in to access more functions</p>
     <a class="btn btn-primary btn-social btn-google" href="/auth/google">
         <span class="fa fa-google"></span> SIGN IN WITH GOOGLE
     </a>
     {{/if}}
 </div>
+<p>Some weather data will shown here</p>
+<form id="display-weather-form" action="/" method="POST">
+    <input type="hidden" id="latitude" value="">
+    <input type="hidden" id="longitude" value="">
+    <button type="submit"> submit</button>
+</form>

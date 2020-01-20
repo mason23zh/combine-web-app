@@ -1,0 +1,14 @@
+<h2>To-do List</h2>
+{{#each todolist}}
+<div class="card card-body mb-2">
+    <h4>{{title}}</h4>
+    <p>{{details}}</p>
+    <a class="btn btn-dark btn-block mb-2" href="/todolist/edit/{{id}}">Edit</a>
+    <form method="post" action="/todolist/{{id}}?_method=DELETE">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="submit" class="btn btn-danger btn-block" value="Delete">
+    </form>
+</div>
+{{else}}
+<p>No To-do list yet</p>
+{{/each}}

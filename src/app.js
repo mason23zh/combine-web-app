@@ -5,6 +5,9 @@ const cookieParse = require('cookie-parser');
 const session = require('express-session');
 const expresHBS = require('express-handlebars');
 const path = require('path');
+const bodyParse = require('body-parser');
+const flash = require('connect-flash');
+const methodOverride = require('method-override');
 
 //*keys
 const keys = require('../config/keys');
@@ -18,6 +21,7 @@ require('../config/passport')(passport);
 //* load ROUTES
 const auth = require('../routes/auth');
 const index = require('../routes/index');
+const todolist = require('../routes/todolist');
 
 //* Global promises
 mongoose.Promise = global.Promise;
@@ -36,6 +40,8 @@ mongoose
 
 const app = express();
 
+app.use(flash());
+
 app.use(express.static(path.join(__dirname, '../public')));
 
 //*handlebar setup
@@ -46,6 +52,17 @@ app.engine(
   })
 );
 app.set('view engine', 'handlebars');
+
+//*body parser middleware
+app.use(
+  bodyParse.urlencoded({
+    enteded: false
+  })
+);
+app.use(bodyParse.json());
+
+//*method-overide help PUT request
+app.use(methodOverride('_method'));
 
 //*port set
 const port = process.env.PORT || 5000;
@@ -64,6 +81,16 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(flash());
+
+app.use(function(req, res, next) {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  res.locals.user = req.user || null;
+  next();
+});
+
 //*set global vers
 app.use((req, res, next) => {
   res.locals.user = req.user || null;
@@ -73,6 +100,18 @@ app.use((req, res, next) => {
 //*use routes
 app.use('/', index);
 app.use('/auth', auth);
+app.use('/todolist', todolist);
+
+//* 404 and 500 Error
+app.use((req, res) => {
+  res.status(404);
+  res.render('404');
+});
+
+app.use((req, res) => {
+  res.status(500);
+  res.render('500');
+});
 
 app.listen(port, () => {
   console.log('server started on port: ' + port);

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-3">
     <a class="navbar-brand" href="/">Combo Tools</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,6 +15,9 @@
                 <a class="nav-link" href="/dashboard">Dashboard</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="/todolist">To-do List</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="/auth/logout">Log Out</a>
             </li>
             {{else}}
@@ -23,5 +26,26 @@
             </li>
             {{/if}}
         </ul>
+
+        <ul class="navbar-nav ml-auto">
+            {{#if user}}
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink">To-do
+                    list</a>
+                <div class="dropdown-menu">
+                    <a href="/todolist" class="dropdown-item">To-do list</a>
+                    <a href="/todolist/add" class="dropdown-item">Add list</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a href="/auth/logout" class="nav-link">Logout</a>
+            </li>
+            {{else}}
+            <li class="nav-item">
+                <a href="/" class="nav-link">Login</a>
+            </li>
+            {{/if}}
+        </ul>
+
     </div>
 </nav>

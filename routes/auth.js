@@ -40,4 +40,10 @@ router.get('/testAuth', (req, res) => {
   }
 });
 
+router.get('/getUserID', (req, res) => {
+  if (req.user) {
+    res.send(req.user._id);
+  }
+})
+
 module.exports = router;
