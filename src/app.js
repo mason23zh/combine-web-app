@@ -11,9 +11,6 @@ const methodOverride = require('method-override');
 const revGeocode = require('./utils/reverseGeocode');
 const forecast = require('./utils/forecast');
 
-
-
-
 //*keys
 const keys = require('../config/keys');
 
@@ -27,6 +24,7 @@ require('../config/passport')(passport);
 const auth = require('../routes/auth');
 const index = require('../routes/index');
 const todolist = require('../routes/todolist');
+const files = require('../routes/files');
 
 //* Global promises
 mongoose.Promise = global.Promise;
@@ -45,9 +43,11 @@ mongoose
 
 const app = express();
 
-app.use(express.json({
-  limit: '1mb'
-}));
+app.use(
+  express.json({
+    limit: '1mb'
+  })
+);
 
 app.use(flash());
 
@@ -106,10 +106,13 @@ app.use((req, res, next) => {
   next();
 });
 
+
+
 //*use routes
 app.use('/', index);
 app.use('/auth', auth);
 app.use('/todolist', todolist);
+app.use('/files', files);
 
 //* 404 and 500 Error
 app.use((req, res) => {

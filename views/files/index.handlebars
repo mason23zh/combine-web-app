@@ -1,0 +1,38 @@
+{{!-- <h1>file index page</h1>
+<div>
+    <form action="files/upload" method="POST" enctype="multipart/form-data">
+        Select File: <input type="file" name="myFiles" multiple>
+        <input type="submit" value="upload your files">
+        <button type="submit">Submit Button</button>
+    </form>
+</div> --}}
+<h2>File Upload</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 m-auto">
+            <h1 class="text-center display-4 my-4">File Upload</h1>
+            <form action="files/upload" method="POST" enctype="multipart/form-data">
+                <div class="custom-file mb-3">
+                    <input type="file" name="file" id="file" class="custom-file-input">
+                    <label for="file" class="custom-file-label">Choose File</label>
+                </div>
+                <input type="submit" value="Submit" class="btn btn-primary">
+            </form>
+            <hr>
+            {{#if files}}
+            {{#each files}}
+            <div class="card card-body mb-3">
+                {{#if this.isImage}}
+                <img src="image/{{this.filename}}" alt="">
+                {{else}}
+                {{this.filename}}
+                {{/if}}
+            </div>
+            {{/each}}
+            {{else}}
+            <p>No files to show</p>
+            {{/if}}
+        </div>
+
+    </div>
+</div>
