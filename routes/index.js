@@ -33,20 +33,14 @@ router.post('/', (req, res) => {
       //console.log(err);
       res.redirect('index/welcome');
     } else {
-      console.log('weather data allocated');
+      //console.log('weather data allocated');
       weatherData.timezone = forecastData.body.timezone;
       weatherData.temperature = forecastData.body.currently.temperature;
       weatherData.apparentTemperature = forecastData.body.currently.apparentTemperature;
       weatherData.summary = forecastData.body.currently.summary;
-      // const weatherData = {
-      //   timezone: forecastData.body.timezone,
-      //   temperature: forecastData.body.currently.temperature,
-      //   apparentTemperature: forecastData.body.currently.apparentTemperature,
-      //   summary: forecastData.body.currently.summary
-      // }
 
-      console.log('current tmp:' + weatherData.temperature);
-      console.log('current timezone:' + weatherData.timezone);
+      //console.log('current tmp:' + weatherData.temperature);
+      //console.log('current timezone:' + weatherData.timezone);
       res.redirect('index/welcome');
     }
   })

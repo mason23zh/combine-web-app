@@ -22,10 +22,6 @@ const UserSchema = new Schema({
 
     image: {
         type: String
-    },
-
-    userFiles: {
-        type: Buffer
     }
 
 });

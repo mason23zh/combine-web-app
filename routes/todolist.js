@@ -1,15 +1,17 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
-const { ensureAuthenticated } = require('../helper/auth');
+const {
+  ensureAuthenticated
+} = require('../helper/auth');
 
 require('../models/Todolist');
 const Todolist = mongoose.model('todolist');
 
 router.get('/', ensureAuthenticated, (req, res) => {
   Todolist.find({
-    user: req.user._id
-  })
+      user: req.user._id
+    })
     .sort({
       date: 'desc'
     })
@@ -27,8 +29,8 @@ router.get('/add', (req, res) => {
 
 //*display edit to-do list
 router.get('/edit/:id', ensureAuthenticated, (req, res) => {
-  console.log('display req user from edit get router::::::' + req.user);
-  console.log('NEXT:' + req.params);
+  //console.log('display req user from edit get router::::::' + req.user);
+  //console.log('NEXT:' + req.params);
   Todolist.findOne({
     _id: req.params.id
   }).then(todolist => {
@@ -36,7 +38,7 @@ router.get('/edit/:id', ensureAuthenticated, (req, res) => {
       req.flash('error_msg', 'Not Authorized');
       res.redirect('/todolist');
     } else {
-      console.log('render edit page.');
+      //console.log('render edit page.');
       res.render('todolist/edit', {
         todolist: todolist
       });
@@ -74,7 +76,7 @@ router.post('/', ensureAuthenticated, (req, res) => {
       req.flash('success_msg', 'to-do list added');
       res.redirect('/todolist');
     });
-    console.log('new massage saved.');
+    //console.log('new massage saved.');
   }
 });
 
