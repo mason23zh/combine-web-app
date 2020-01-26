@@ -10,6 +10,7 @@ const flash = require('connect-flash');
 const methodOverride = require('method-override');
 const revGeocode = require('./utils/reverseGeocode');
 const forecast = require('./utils/forecast');
+const moment = require('moment');
 
 //*keys
 const keys = require('../config/keys');
@@ -54,10 +55,43 @@ app.use(flash());
 app.use(express.static(path.join(__dirname, '../public')));
 
 //*handlebar setup
+//*Custom helper to display live time.
 app.engine(
   'handlebars',
   expresHBS({
-    defaultLayout: 'main'
+    defaultLayout: 'main',
+    helpers: {
+      displayTime: function() {
+        const today = new Date();
+        const hour = today.getHours();
+        const minute = today.getMinutes();
+        const seconds = today.getSeconds();
+        const timeString = hour + ':' + minute + ':' + seconds;
+        console.log('call back');
+        setInterval(() => {
+          (function() {})();
+        }, 1000);
+
+        return timeString;
+      },
+
+      displayTimeV2: function() {
+        var timeString = '';
+        setInterval(() => {
+          const today = new Date();
+          const hour = today.getHours();
+          const minute = today.getMinutes();
+          const seconds = today.getSeconds();
+          timeString = hour + ':' + minute + ':' + seconds;
+        }, 1000);
+        return timeString;
+      },
+      displayTimeV3: function() {
+        setTimeout(() => {
+          return moment().format();
+        }, 1000);
+      }
+    }
   })
 );
 app.set('view engine', 'handlebars');
@@ -92,7 +126,7 @@ app.use(passport.session());
 
 app.use(flash());
 
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
   res.locals.error = req.flash('error');
@@ -105,8 +139,6 @@ app.use((req, res, next) => {
   res.locals.user = req.user || null;
   next();
 });
-
-
 
 //*use routes
 app.use('/', index);

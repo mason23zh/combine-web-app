@@ -1,12 +1,22 @@
 const express = require('express');
 const router = express.Router();
 const forecast = require('../src/utils/forecast.js')
+const expresHBS = require('express-handlebars');
+
 const weatherData = {
   timezone: '',
   temperature: '',
   apparentTemperature: '',
   summary: ''
 }
+
+router.get('/*', (req, res) => {
+  const context = {
+    weatherData: weatherData,
+    userRequest: req.user
+  }
+  res.render('index/welcome', context);
+})
 
 
 
