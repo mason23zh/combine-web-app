@@ -61,7 +61,7 @@ app.engine(
   expresHBS({
     defaultLayout: 'main',
     helpers: {
-      displayTime: function() {
+      displayTime: function () {
         const today = new Date();
         const hour = today.getHours();
         const minute = today.getMinutes();
@@ -69,13 +69,13 @@ app.engine(
         const timeString = hour + ':' + minute + ':' + seconds;
         console.log('call back');
         setInterval(() => {
-          (function() {})();
+          (function () {})();
         }, 1000);
 
         return timeString;
       },
 
-      displayTimeV2: function() {
+      displayTimeV2: function () {
         var timeString = '';
         setInterval(() => {
           const today = new Date();
@@ -86,7 +86,7 @@ app.engine(
         }, 1000);
         return timeString;
       },
-      displayTimeV3: function() {
+      displayTimeV3: function () {
         setTimeout(() => {
           return moment().format();
         }, 1000);
@@ -126,7 +126,7 @@ app.use(passport.session());
 
 app.use(flash());
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
   res.locals.error = req.flash('error');
