@@ -10,13 +10,13 @@ const weatherData = {
   summary: ''
 }
 
-router.get('/*', (req, res) => {
-  const context = {
-    weatherData: weatherData,
-    userRequest: req.user
-  }
-  res.render('index/welcome', context);
-})
+// router.get('/*', (req, res) => {
+//   const context = {
+//     weatherData: weatherData,
+//     userRequest: req.user
+//   }
+//   res.render('index/welcome', context);
+// })
 
 
 
@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
     weatherData: weatherData,
     userRequest: req.user
   }
-  res.render('index/welcome', context);
+  res.render('../views/index/welcome', context);
 });
 
 router.get('/dashboard', (req, res) => {
