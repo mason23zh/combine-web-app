@@ -3,6 +3,10 @@ const router = express.Router();
 const forecast = require('../src/utils/forecast.js')
 const expresHBS = require('express-handlebars');
 
+const unitData = {
+  result: '',
+}
+
 const weatherData = {
   timezone: '',
   temperature: '',
@@ -22,6 +26,7 @@ const weatherData = {
 
 router.get('/', (req, res) => {
   const context = {
+    unitData: unitData,
     weatherData: weatherData,
     userRequest: req.user
   }
@@ -55,6 +60,22 @@ router.post('/', (req, res) => {
     }
   })
 })
+
+/**
+ * *Unit conversion
+ */
+
+
+router.get('/unit', (req, res) => {
+  res.render('index/unit');
+})
+
+
+// router.post('/unit', (req, res) => {
+//   const newNumber = req.body.unit * 10;
+//   unitData.result = newNumber;
+//   res.redirect('/')
+// })
 
 
 module.exports = router;
