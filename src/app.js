@@ -26,7 +26,6 @@ const auth = require('../routes/auth');
 const index = require('../routes/index');
 const todolist = require('../routes/todolist');
 const files = require('../routes/files');
-const games = require('../routes/games');
 
 //* Global promises
 mongoose.Promise = global.Promise;
@@ -146,8 +145,6 @@ app.use('/', index);
 app.use('/auth', auth);
 app.use('/todolist', todolist);
 app.use('/files', files);
-app.use('/games', games);
-
 
 //* 404 and 500 Error
 app.use((req, res) => {
